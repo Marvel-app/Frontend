@@ -1,14 +1,15 @@
 @font-face {
   font-family: 'Formula-Condensed';
+  font-weight: bold;
   font-style: normal;
-  src: url('./FormulaCondensed/FormulaCondensed-Regular.otf') format('opentype');
+  src: url('./FormulaCondensed/FormulaCondensed-Bold.otf') format('opentype');
 }
 
 @font-face {
   font-family: 'Formula-Condensed';
-  font-weight: bold;
+  font-weight: normal;
   font-style: normal;
-  src: url('./FormulaCondensed/FormulaCondensed-Bold.otf') format('opentype');
+  src: url('./FormulaCondensed/FormulaCondensed-Regular.otf') format('opentype');
 }
 
 @font-face {

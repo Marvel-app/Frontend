@@ -2,7 +2,11 @@ import './assets/styles/App.scss';
 import { LandingPage } from './pages/LandingPage';
 
 function App() {
-  return <LandingPage />;
+  return (
+    <div>
+      <LandingPage />
+    </div>
+  );
 }
 
 export default App;

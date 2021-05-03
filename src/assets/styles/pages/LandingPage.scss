@@ -1,0 +1,39 @@
+.landing-page {
+  background-image: url('../../images/landingPage.jpg');
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+
+  &__overlay {
+    background: rgba(0, 0, 0, 0.6);
+    height: 100%;
+    width: 100%;
+  }
+
+  &__title {
+    @include container;
+    padding-top: 5em;
+    & span {
+      font-family: $font1;
+      font-size: $megaTitle;
+      font-weight: bold;
+      line-height: 1.04;
+      color: $white;
+    }
+  }
+
+  &__cta {
+    display: flex;
+    & button {
+      border: 0;
+      border-radius: 60px;
+      font-family: $font2;
+      font-weight: bold;
+      font-size: $largeTitle;
+      padding: 0 80px;
+      width: fit-content;
+      height: fit-content;
+      // line-height: 1.;
+    }
+  }
+}
