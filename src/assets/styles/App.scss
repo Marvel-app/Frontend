@@ -1,0 +1,41 @@
+//Fonts
+@import '../fonts/FontsDeclaration.scss';
+
+$font1: 'Formula Condensed', sans-serif;
+$font2: 'TT Hoves', sans-serif;
+
+//Colors
+$white: #ffffff;
+$black: #000000;
+$mainBackground: #f3eee8;
+
+//Font sizes
+$megaTitle: '144px';
+$largeTitle: '72px';
+$title1: '48px';
+$title2: '40px';
+$title3: '32px';
+$subtitle: '24px';
+$body: '16px';
+$subheadline: '13px';
+$footnote: '11px';
+
+h1 {
+  font-size: $title1;
+  font-family: $font1;
+}
+
+h2 {
+  font-size: $title2;
+  font-family: $font1;
+}
+
+h3 {
+  font-size: $title3;
+  font-family: $font1;
+}
+
+body {
+  font-family: $font2;
+  margin: 0;
+}
