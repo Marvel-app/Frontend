@@ -1,8 +1,10 @@
 interface Props {
   noBg?: boolean;
+  landingPage?: boolean;
+  isHome?: boolean;
 }
 
-export const NavBar = ({ noBg }: Props) => {
+export const NavBar = ({ noBg, landingPage, isHome }: Props) => {
   return (
     <div
       className='nav-bar'
@@ -11,9 +13,13 @@ export const NavBar = ({ noBg }: Props) => {
       <nav className='nav-bar__container'>
         <h2 className='nav-bar__title'>MARVEL</h2>
         <div className='nav-bar__options'>
-          <a>FAVORITES</a>
-          <a>SIGN UP</a>
-          <a>SIGN IN</a>
+          {landingPage ? (
+            <>
+              <a>SIGN IN</a>
+              <a>SIGN UP</a>
+            </>
+          ) : null}
+          {isHome ? <a>FAVORITES</a> : null}
         </div>
       </nav>
     </div>

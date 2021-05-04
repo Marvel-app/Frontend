@@ -10,7 +10,7 @@ $black: #000000;
 $mainBackground: #f3eee8;
 
 //Font sizes
-$megaTitle: 8em; //144px
+$megaTitle: 6.5em; //144px
 $largeTitle: 4.5em; //72px
 $title1: 3em; //48px
 $title2: 2.5em; //40px
@@ -38,7 +38,15 @@ $mq-xlarge: '(min-width: #{$bp-xlarge})';
 $mq-xxlarge: '(min-width: #{$bp-xxlarge})';
 $mq-retina: '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)';
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
+  height: 100vh;
+  width: 100vw;
   font-family: $font2;
   margin: 0;
   font-size: $body;
@@ -96,5 +104,12 @@ h3 {
   margin: 0;
 }
 
+.App {
+  height: 100vh;
+  width: 100vw;
+}
+
 @import '../styles/components/NavBar.scss';
 @import '../styles/pages/LandingPage.scss';
+@import '../styles/pages/SignUpPage.scss';
+@import '../styles/pages/SignInPage.scss';

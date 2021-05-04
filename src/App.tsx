@@ -1,10 +1,12 @@
 import './assets/styles/App.scss';
-import { LandingPage } from './pages/LandingPage';
+import { SignInPage } from './pages/SignInPage';
 
 function App() {
   return (
-    <div>
-      <LandingPage />
+    <div className='App'>
+      {/* <LandingPage /> */}
+      {/* <SignUpPage /> */}
+      <SignInPage />
     </div>
   );
 }
