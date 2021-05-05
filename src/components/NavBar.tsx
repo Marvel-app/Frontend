@@ -19,7 +19,12 @@ export const NavBar = ({ noBg, landingPage, isHome }: Props) => {
               <a>SIGN UP</a>
             </>
           ) : null}
-          {isHome ? <a>FAVORITES</a> : null}
+          {isHome ? (
+            <>
+              <a>FAVORITES</a>
+              <a>LOG OUT</a>
+            </>
+          ) : null}
         </div>
       </nav>
     </div>

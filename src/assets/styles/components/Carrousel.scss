@@ -1,0 +1,43 @@
+.carrousel {
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+  @include container;
+
+  &__headers {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    & h2 {
+      font-family: $font2;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    & a {
+      align-self: center;
+      font-weight: bold;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  &__comic-container {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+
+    &-item {
+      //   transition: 450ms -webkit-transform;
+      //   transition: 450ms transform;
+      //   transition: 450ms transform, 450ms -webkit-transform;
+      &:hover {
+        //     -webkit-transform: scale(1.5);
+        //     transform: scale(1.5);
+        //     opacity: 1;
+        cursor: pointer;
+      }
+    }
+  }
+}

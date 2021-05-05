@@ -1,0 +1,44 @@
+.favorites-list {
+  &__container {
+    background-color: $mainBackground;
+  }
+
+  &__title {
+    text-align: center;
+    @include container;
+  }
+
+  &__comics-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    @include container;
+
+    @media #{$mq-large} {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    @media #{$mq-xlarge} {
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    &-item {
+      padding-right: 0.2em;
+      margin-bottom: 0.8em;
+    }
+  }
+
+  &__lucky {
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+    & button {
+      cursor: pointer;
+      padding: 1em 4em;
+      border: none;
+      background-color: $black;
+      font-size: $body;
+      color: $white;
+      margin-bottom: 1em;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.comic {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1em;
+
+    & p {
+      font-size: $subheadline;
+      text-align: center;
+    }
+  }
+}
