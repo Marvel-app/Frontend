@@ -1,5 +1,5 @@
 .sign-in-page {
-  background-image: url('../../images/signUpPage.jpg');
+  background-image: url('../../images/signInPage.jpg');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -78,7 +78,6 @@
       align-items: center;
       justify-content: center;
       margin: 0 30px;
-      margin-bottom: 32px;
       border: none;
       background-color: $white;
       color: $black;
@@ -91,6 +90,17 @@
 
       &:hover {
         cursor: pointer;
+      }
+    }
+
+    &-signin-redirect {
+      text-decoration: none;
+      color: $black;
+      text-align: center;
+      margin-bottom: 32px;
+      font-size: $subheadline;
+      & span {
+        font-weight: bold;
       }
     }
   }

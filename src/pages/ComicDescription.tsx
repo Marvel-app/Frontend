@@ -1,5 +1,4 @@
 import { NavBar } from '../components/NavBar';
-import comicThumbnail from '../assets/images/comicThumbnail.png';
 
 export const ComicDescription = () => {
   return (

@@ -78,7 +78,6 @@
       align-items: center;
       justify-content: center;
       margin: 0 30px;
-      margin-bottom: 32px;
       border: none;
       background-color: $white;
       color: $black;
@@ -91,6 +90,17 @@
 
       &:hover {
         cursor: pointer;
+      }
+    }
+
+    &-signup-redirect {
+      text-decoration: none;
+      color: $black;
+      text-align: center;
+      margin-bottom: 32px;
+      font-size: $subheadline;
+      & span {
+        font-weight: bold;
       }
     }
   }

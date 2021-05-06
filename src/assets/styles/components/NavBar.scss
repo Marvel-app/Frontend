@@ -15,11 +15,15 @@
 }
 
 .nav-bar__options {
+  display: flex;
   & a {
-    color: $white;
-    margin-left: 1.7em;
-    font-family: $font1;
-    font-size: $subtitle;
-    font-weight: normal;
+    text-decoration: none;
+    & p {
+      color: $white;
+      margin-left: 1.7em;
+      font-family: $font1;
+      font-size: $subtitle;
+      font-weight: normal;
+    }
   }
 }
