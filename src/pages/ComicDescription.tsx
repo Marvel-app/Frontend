@@ -1,7 +1,12 @@
 import { NavBar } from '../components/NavBar';
+import { url } from '../globals';
 import { IComic } from './Home';
+import Swal from 'sweetalert2';
+import { useHistory } from 'react-router';
+import { getToken } from '../utils/getToken';
 
 export const ComicDescription = (props: any) => {
+  const history = useHistory();
   const {
     title,
     description,
@@ -12,7 +17,55 @@ export const ComicDescription = (props: any) => {
     writer,
   }: IComic = props.location.state;
 
-  console.log(props.location.state);
+  const validateToken = (): string => {
+    const token = getToken();
+    if (token === '') {
+      history.push('/signin');
+    }
+    return token;
+  };
+  // console.log(props.location.state);
+  const addComicToFavorite = async () => {
+    const token = validateToken();
+    const body = {
+      title,
+      description,
+      image,
+      publish,
+      coverArtist,
+      penciler,
+      writer,
+    };
+    await fetch(`${url}/api/user/favorites`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    })
+      .then((r) => r.json())
+      .then((response) => {
+        console.log(response);
+        Swal.fire({
+          title: 'Comic added succesfully to your favorites',
+          icon: 'success',
+          confirmButtonText: 'Cool',
+        });
+      })
+      .catch(() =>
+        Swal.fire({
+          title: 'Ocurrio un error!',
+          icon: 'error',
+          confirmButtonText: 'Cerrar',
+        }).then((result) => {
+          if (result.value) {
+            window.location.reload();
+          }
+        })
+      );
+  };
 
   return (
     <div className='comic-description'>
@@ -81,6 +134,11 @@ export const ComicDescription = (props: any) => {
                   </>
                 ) : null}
               </div>
+            </div>
+            <div className='comic-description__add-to-favorite'>
+              <button type='button' onClick={() => addComicToFavorite()}>
+                Add to favorites
+              </button>
             </div>
           </div>
         </div>

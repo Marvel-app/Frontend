@@ -11,6 +11,7 @@ export const Comic = ({ title, thumbnail }: Props) => {
       <img
         src={thumbnail === '' ? comicThumbnail : thumbnail}
         height='317px'
+        width='230px'
         alt={title}
       />
       <p>{title}</p>

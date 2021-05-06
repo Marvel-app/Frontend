@@ -44,4 +44,18 @@
       }
     }
   }
+
+  &__add-to-favorite {
+    align-self: center;
+
+    & button {
+      cursor: pointer;
+      padding: 1em 4em;
+      border: none;
+      background-color: $black;
+      font-size: $body;
+      color: $white;
+      margin-bottom: 1em;
+    }
+  }
 }
