@@ -2,7 +2,7 @@ import './assets/styles/App.scss';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { SignInPage } from './pages/SignInPage';
 import { Home } from './pages/Home';
-import { FavoritesSearchBar } from './pages/FavoritesSearchBar';
+import { SearchBar } from './pages/SearchBar';
 import { FavoritesList } from './pages/FavoritesList';
 import { ComicDescription } from './pages/ComicDescription';
 import { LandingPage } from './pages/LandingPage';
@@ -17,11 +17,7 @@ function App() {
           <Route exact path='/signup' component={SignUpPage} />
           <Route exact path='/signin' component={SignInPage} />
           <Route exact path='/home' component={Home} />
-          <Route
-            exact
-            path='/favorites-search'
-            component={FavoritesSearchBar}
-          />
+          <Route exact path='/search' component={SearchBar} />
           <Route exact path='/favorites-list' component={FavoritesList} />
           <Route exact path='/comic-description' component={ComicDescription} />
         </Switch>

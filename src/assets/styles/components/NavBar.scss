@@ -2,6 +2,9 @@
   background-color: $black;
   margin-bottom: 80px;
   &__container {
+    & a {
+      text-decoration: none;
+    }
     display: flex;
     justify-content: space-between;
     align-items: center;

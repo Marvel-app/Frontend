@@ -1,24 +1,140 @@
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
+import { useHistory } from 'react-router';
 import { NavBar } from '../components/NavBar';
 import { Carrousel } from '../components/Carrousel';
-import mockData from '../ironman.json';
+import { url } from '../globals';
+import { getToken } from '../utils/getToken';
+
+export interface IComic {
+  title: string;
+  description: string;
+  image: string;
+  publish: string;
+  coverArtist: string;
+  penciler: string;
+  writer: string;
+}
+
+export interface IHero {
+  heroName: string;
+  heroDescription: string;
+  heroImage: string;
+}
+
+export interface Info {
+  heroInfo?: IHero;
+  comicsArray: IComic[];
+}
 
 export const Home = () => {
-  const [data, setData] = useState({ heroInfo: {}, comicsArray: [] });
+  const history = useHistory();
+  const [favorites, setFavorites] = useState<Info>({ comicsArray: [] });
+  const [newComics, setNewComics] = useState<Info>({ comicsArray: [] });
+  const [comicsByHero, setComicsByHero] = useState<Info>({ comicsArray: [] });
+
+  const getFavorites = async (token: string) => {
+    await fetch(`${url}/api/user/favorites`, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    })
+      .then((r) => r.json())
+      .then((response) => {
+        console.log('aqui estan los favoritos', response);
+        setFavorites({ comicsArray: response.favorites });
+      })
+      .catch(() =>
+        Swal.fire({
+          title: 'Ocurrio un error!',
+          icon: 'error',
+          confirmButtonText: 'Cerrar',
+        }).then((result) => {
+          if (result.value) {
+            window.location.reload();
+          }
+        })
+      );
+  };
+
+  const getNewComics = async (token: string) => {
+    await fetch(`${url}/api/comics/randoms?numberComics=10`, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    })
+      .then((r) => r.json())
+      .then((response) => {
+        console.log('aqui estan los comics nuevos', response);
+        setNewComics({ comicsArray: response.comicsArray });
+      })
+      .catch(() =>
+        Swal.fire({
+          title: 'Ocurrio un error!',
+          icon: 'error',
+          confirmButtonText: 'Cerrar',
+        }).then((result) => {
+          if (result.value) {
+            window.location.reload();
+          }
+        })
+      );
+  };
+
+  const getComicsByHero = async (token: string) => {
+    await fetch(`${url}/api/comics?heroname=spider-man&numberComics=20`, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    })
+      .then((r) => r.json())
+      .then((response) => {
+        console.log('aqui estan los comics por heroe', response);
+        setComicsByHero(response);
+      })
+      .catch(() =>
+        Swal.fire({
+          title: 'Ocurrio un error!',
+          icon: 'error',
+          confirmButtonText: 'Cerrar',
+        }).then((result) => {
+          if (result.value) {
+            window.location.reload();
+          }
+        })
+      );
+  };
+
   const fetchComics = async () => {
-    // console.log(mockData);
-    setData(mockData as any);
+    const token = getToken();
+    if (getToken() === '') {
+      history.push('/signin');
+    } else {
+      getFavorites(token);
+      getNewComics(token);
+      getComicsByHero(token);
+    }
   };
 
   useEffect(() => {
     fetchComics();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className='home__background'>
       <NavBar isHome={true} />
-      <Carrousel title='Favorite Comics' data={data as any} />
-      <Carrousel title='Find New Comics' data={data as any} />
-      <Carrousel title='Comics by Hero' data={data as any} />
+      <Carrousel title='Favorite Comics' data={favorites} type='favorites' />
+      <Carrousel title='Find New Comics' data={newComics} />
+      <Carrousel title='Comics by Hero' data={comicsByHero} />
     </div>
   );
 };

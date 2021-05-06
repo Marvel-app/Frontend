@@ -13,7 +13,9 @@ export const NavBar = ({ noBg, landingPage, isHome }: Props) => {
       style={noBg ? { backgroundColor: 'transparent' } : undefined}
     >
       <nav className='nav-bar__container'>
-        <h2 className='nav-bar__title'>MARVEL</h2>
+        <Link to='/home'>
+          <h2 className='nav-bar__title'>MARVEL</h2>
+        </Link>
         <div className='nav-bar__options'>
           {landingPage ? (
             <>

@@ -1,11 +1,18 @@
 .favorites-list {
+  height: 100%;
   &__container {
     background-color: $mainBackground;
+    height: 100%;
   }
 
   &__title {
     text-align: center;
     @include container;
+  }
+
+  &__no-favorites {
+    font-size: $title3;
+    text-align: center;
   }
 
   &__comics-container {
@@ -24,6 +31,10 @@
     &-item {
       padding-right: 0.2em;
       margin-bottom: 0.8em;
+    }
+
+    & p {
+      text-align: center;
     }
   }
 

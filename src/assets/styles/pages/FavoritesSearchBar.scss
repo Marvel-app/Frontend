@@ -1,12 +1,16 @@
-.favorites-search-bar {
+.search-bar {
+  height: 100%;
   &__container {
+    height: 100%;
     background-color: $mainBackground;
   }
 
   &__input-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-content: center;
     margin-bottom: 50px;
+    @include container;
     & input {
       height: 2.5em;
       width: 100%;
@@ -18,10 +22,22 @@
       font-weight: bold;
       text-transform: uppercase;
       padding-left: 45px;
-      @include container;
+      margin-bottom: 50px;
 
       &:focus-visible {
         outline: none;
+      }
+    }
+    & button {
+      margin-top: 26px;
+      border: none;
+      background-color: $black;
+      color: $white;
+      padding: 21px 50px;
+      font-size: $body;
+      align-self: center;
+      &:hover {
+        cursor: pointer;
       }
     }
   }
