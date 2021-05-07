@@ -27,7 +27,7 @@ export const SignInPage = () => {
 
   const loginUser = async () => {
     const userInfo = JSON.stringify(form);
-    console.log(userInfo);
+    // console.log(userInfo);
     await fetch(`${url}/api/user/login`, {
       method: 'POST',
       mode: 'cors',
@@ -36,14 +36,41 @@ export const SignInPage = () => {
       },
       body: userInfo,
     })
-      .then((r) => r.json())
-      .then((response) => {
-        const { jwt } = response;
-        console.log(jwt);
-        document.cookie = `jwt=${jwt};max-age=900;secure`;
-        history.push('/home');
+      .then((r) => {
+        if (r.status === 409 || 400) {
+          Swal.fire({
+            title: 'Credenciales incorrectas',
+            icon: 'error',
+            confirmButtonText: 'Cerrar',
+          }).then((result) => {
+            if (result.value) {
+              window.location.reload();
+            }
+          });
+        } else {
+          r.json();
+        }
       })
-      .catch(() =>
+      .then((response: any) => {
+        if (response === undefined) {
+          Swal.fire({
+            title: 'Credenciales incorrectas',
+            icon: 'error',
+            confirmButtonText: 'Cerrar',
+          }).then((result) => {
+            if (result.value) {
+              window.location.reload();
+            }
+          });
+        } else {
+          const { jwt } = response;
+          console.log(jwt);
+          document.cookie = `jwt=${jwt};max-age=900;secure`;
+          history.push('/home');
+        }
+      })
+      .catch((err) => {
+        console.log('err', err);
         Swal.fire({
           title: 'Ocurrio un error!',
           icon: 'error',
@@ -52,8 +79,8 @@ export const SignInPage = () => {
           if (result.value) {
             window.location.reload();
           }
-        })
-      );
+        });
+      });
   };
 
   return (
