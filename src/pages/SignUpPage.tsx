@@ -150,10 +150,15 @@ export const SignUpPage = () => {
             </button>
           </form>
           <p className='sign-up-page__card--or'>Or</p>
-          <button className='sign-up-page__card--google' type='button'>
+          <a
+            className='sign-up-page__card--google'
+            href='https://marvelappplatzimaster.herokuapp.com/api/oauth/google'
+            // target='_blank'
+            rel='noreferrer'
+          >
             <img src={googleIcon} alt='google icon' />
             Sign up with Google
-          </button>
+          </a>
           <Link to='/signin' className='sign-up-page__card-signup-redirect'>
             <p>
               Already have an account? Sign in<span> here!</span>

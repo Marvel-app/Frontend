@@ -37,7 +37,7 @@ export const SignInPage = () => {
       body: userInfo,
     })
       .then((r) => {
-        if (r.status === 409 || 400) {
+        if (r.status === 409 || r.status === 400) {
           Swal.fire({
             title: 'Credenciales incorrectas',
             icon: 'error',
@@ -48,10 +48,11 @@ export const SignInPage = () => {
             }
           });
         } else {
-          r.json();
+          return r.json();
         }
       })
       .then((response: any) => {
+        console.log('aqui esta la respuesta', response);
         if (response === undefined) {
           Swal.fire({
             title: 'Credenciales incorrectas',
@@ -119,7 +120,7 @@ export const SignInPage = () => {
           <a
             className='sign-in-page__card--google'
             href='https://marvelappplatzimaster.herokuapp.com/api/oauth/google'
-            target='_blank'
+            // target='_blank'
             rel='noreferrer'
           >
             <img src={googleIcon} alt='google icon' />

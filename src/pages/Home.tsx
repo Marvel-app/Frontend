@@ -27,11 +27,18 @@ export interface Info {
   comicsArray: IComic[];
 }
 
-export const Home = () => {
+export const Home = ({ location }: any) => {
   const history = useHistory();
   const [favorites, setFavorites] = useState<Info>({ comicsArray: [] });
   const [newComics, setNewComics] = useState<Info>({ comicsArray: [] });
   const [comicsByHero, setComicsByHero] = useState<Info>({ comicsArray: [] });
+
+  const getJwtFromGoogle = () => {
+    if (location.search) {
+      const trimJwt = location.search.slice(5);
+      document.cookie = `jwt=${trimJwt};max-age=900;secure`;
+    }
+  };
 
   const getFavorites = async (token: string) => {
     await fetch(`${url}/api/user/favorites`, {
@@ -126,6 +133,7 @@ export const Home = () => {
   };
 
   useEffect(() => {
+    getJwtFromGoogle();
     fetchComics();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
