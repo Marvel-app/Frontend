@@ -1,46 +1,62 @@
-# Getting Started with Create React App
+# Marvel Comics App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project made in Platzi Master Program
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+App made to save your favorite marvel comics and its relevant information such as description, writer, cover artists, etc.
 
-### `npm start`
+Inside the app you can browse comics by hero. Save it in your favorites list and find new comics inside the marvel comics repertory.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+You can sign in via Google and via username and password.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Technologies used
 
-### `npm test`
+The frontend was made with:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**React** ⇒ As the main framework
 
-### `npm run build`
+**SASS** ⇒As a CSS preprocessor
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Typescript** ⇒ As the main language
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Routes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**/** ⇒ Here you can find the landing page with some art work and a call to action
 
-### `npm run eject`
+**/signin** ⇒ Here you can log in via username and password or via Google
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**/signup** ⇒ Here you can create your account with an email and username or via Google
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**/home** ⇒ Here you can watch your favorites comics, new random comics for you and comics filtered by hero
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**/favorites-list** ⇒ Here you can watch your complete favorites list, also you can add 3 random comics to your list
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**/search** ⇒ Here you can search comics by hero
 
-## Learn More
+Also you can click on any comic cover and it will show you details about the comic if there is any.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## NPM commands
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Development
+
+You can start you app locally using
+
+```bash
+npm install
+npm run start
+```
+
+### Production build
+
+To build the app, you can use:
+
+```bash
+npm run build
+```
+
+## Mockup and deploy
+
+You can watch the mockup [here](https://www.figma.com/file/EYU77R1fsnKBUcxs2yHafD/MarvelApp-Mockup?node-id=23%3A0)
+
+The app was deployed in Vercel, you can see it [here](https://marvelapp-frontend.vercel.app/)
