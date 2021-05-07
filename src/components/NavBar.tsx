@@ -7,6 +7,10 @@ interface Props {
 }
 
 export const NavBar = ({ noBg, landingPage, isHome }: Props) => {
+  const deleteToken = () => {
+    document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+    console.log('borrando token');
+  };
   return (
     <div
       className='nav-bar'
@@ -29,11 +33,8 @@ export const NavBar = ({ noBg, landingPage, isHome }: Props) => {
           ) : null}
           {isHome ? (
             <>
-              <Link to='/favorites-list'>
-                <p>FAVORITES</p>
-              </Link>
               <Link to='/signin'>
-                <p>LOG OUT</p>
+                <p onClick={() => deleteToken()}>LOG OUT</p>
               </Link>
             </>
           ) : null}
