@@ -3,14 +3,12 @@
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100%;
-  width: 100%;
+  min-height: 100vh;
   position: relative;
 
   &__overlay {
     background-color: rgba(0, 0, 0, 0.6);
-    height: 100%;
-    width: 100%;
+    min-height: 100vh;
   }
 
   &__title {

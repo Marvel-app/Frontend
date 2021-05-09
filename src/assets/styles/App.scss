@@ -45,8 +45,8 @@ $mq-retina: '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)';
 }
 
 body {
-  height: 100vh;
-  width: 100vw;
+  // min-height: 100vh;
+  // width: 100vw;
   font-family: $font2;
   margin: 0;
   font-size: $body;
@@ -116,6 +116,6 @@ h3 {
 @import '../styles/pages/Home.scss';
 @import '../styles/components/Carrousel.scss';
 @import '../styles/components/Comic.scss';
-@import '../styles/pages/FavoritesSearchBar.scss';
+@import '../styles/pages/SearchBar.scss';
 @import '../styles/pages/FavoritesList.scss';
 @import '../styles/pages/ComicDescription.scss';

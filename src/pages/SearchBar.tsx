@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { Comic } from '../components/Comic';
 import { NavBar } from '../components/NavBar';
@@ -41,7 +41,6 @@ export const SearchBar = () => {
     return token;
   };
 
-  // const [data, setData] = useState({ heroInfo: {}, comicsArray: [] });
   const searchComics = async () => {
     const token = validateToken();
     await fetch(
@@ -72,10 +71,6 @@ export const SearchBar = () => {
         })
       );
   };
-
-  useEffect(() => {
-    console.log('aqui estan los comics encontrados', comicsFound);
-  }, [comicsFound]);
 
   return (
     <div className='search-bar'>
