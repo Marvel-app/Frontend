@@ -104,66 +104,68 @@ export const SignUpPage = () => {
     <div className='sign-up-page'>
       <div className='sign-up-page__overlay'>
         <NavBar noBg={true} />
-        <h3 className='sign-up-page__title'>
-          <span>Start your</span>
-          <span>comics</span>
-          <span>collection</span>
-          <span>today!</span>
-        </h3>
-        <div className='sign-up-page__card'>
-          <p className='sign-up-page__card--title'>Sign up</p>
-          <form>
-            <label>Username</label>
-            <input
-              name='username'
-              placeholder='Username'
-              type='text'
-              onChange={handleInput}
-            />
-            <label>Email</label>
-            <input
-              name='email'
-              placeholder='Email'
-              type='email'
-              onChange={handleInput}
-            />
-            <label>Password</label>
-            <input
-              name='password'
-              placeholder='Password'
-              type='password'
-              onChange={handleInput}
-            />
-            <label>Confirm password</label>
-            <input
-              name='confirmPassword'
-              placeholder='Confirm password'
-              type='password'
-              onChange={handleInput}
-            />
-            <button
-              className='sign-up-page__card--getstarted'
-              type='button'
-              onClick={() => validatePassword()}
+        <div className='sign-up-page__main'>
+          <h3 className='sign-up-page__title'>
+            <span>Start your</span>
+            <span>comics</span>
+            <span>collection</span>
+            <span>today!</span>
+          </h3>
+          <div className='sign-up-page__card'>
+            <p className='sign-up-page__card--title'>Sign up</p>
+            <form>
+              <label>Username</label>
+              <input
+                name='username'
+                placeholder='Username'
+                type='text'
+                onChange={handleInput}
+              />
+              <label>Email</label>
+              <input
+                name='email'
+                placeholder='Email'
+                type='email'
+                onChange={handleInput}
+              />
+              <label>Password</label>
+              <input
+                name='password'
+                placeholder='Password'
+                type='password'
+                onChange={handleInput}
+              />
+              <label>Confirm password</label>
+              <input
+                name='confirmPassword'
+                placeholder='Confirm password'
+                type='password'
+                onChange={handleInput}
+              />
+              <button
+                className='sign-up-page__card--getstarted'
+                type='button'
+                onClick={() => validatePassword()}
+              >
+                Get Started
+              </button>
+            </form>
+            <p className='sign-up-page__card--or'>Or</p>
+            <a
+              className='sign-up-page__card--google'
+              href='https://marvelappplatzimaster.herokuapp.com/api/oauth/google'
+              // target='_blank'
+              rel='noreferrer'
             >
-              Get Started
-            </button>
-          </form>
-          <p className='sign-up-page__card--or'>Or</p>
-          <a
-            className='sign-up-page__card--google'
-            href='https://marvelappplatzimaster.herokuapp.com/api/oauth/google'
-            // target='_blank'
-            rel='noreferrer'
-          >
-            <img src={googleIcon} alt='google icon' />
-            Sign up with Google
-          </a>
-          <Link to='/signin' className='sign-up-page__card-signup-redirect'>
-            <p>
-              Already have an account? Sign in<span> here!</span>
-            </p>
-          </Link>
+              <img src={googleIcon} alt='google icon' />
+              Sign up with Google
+            </a>
+            <Link to='/signin' className='sign-up-page__card-signup-redirect'>
+              <p>
+                Already have an account? Sign in<span> here!</span>
+              </p>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

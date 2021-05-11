@@ -1,6 +1,16 @@
 //Fonts
 @import '../fonts/FontsDeclaration.scss';
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
 $font1: 'Formula-Condensed', sans-serif;
 $font2: 'TT Hoves', sans-serif;
 
@@ -10,25 +20,25 @@ $black: #000000;
 $mainBackground: #f3eee8;
 
 //Font sizes
-$megaTitle: 6.5em; //144px
-$largeTitle: 4.5em; //72px
-$title1: 3em; //48px
-$title2: 2.5em; //40px
-$title3: 2em; //32px
-$subtitle: 1.5em; //24px
-$body: 1em; //16px
-$subheadline: 0.8em; //13px
-$footnote: 0.7em; //11px
+$megaTitle: 14.4rem; //144px
+$largeTitle: 7.2rem; //72px
+$title1: 4.8rem; //48px
+$title2: 4rem; //40px
+$title3: 3.2rem; //32px
+$subtitle: 2.4rem; //24px
+$body: 1.6rem; //16px
+$subheadline: 1.3rem; //13px
+$footnote: 1.2rem; //11px
 
 //Line-Height
 $line-height: 1.5;
 
 // Breakpoints
-$bp-small: 48em; // 768px
-$bp-medium: 64em; // 1024px
-$bp-large: 85.375em; // 1366px
-$bp-xlarge: 120em; // 1920px
-$bp-xxlarge: 160em; // 2560px
+$bp-small: 768px; // 768px
+$bp-medium: 1024px; // 1024px
+$bp-large: 1336px; // 1366px
+$bp-xlarge: 1920px; // 1920px
+$bp-xxlarge: 2560px; // 2560px
 
 // Media Queries
 $mq-small: '(min-width: #{$bp-small})';
@@ -38,36 +48,27 @@ $mq-xlarge: '(min-width: #{$bp-xlarge})';
 $mq-xxlarge: '(min-width: #{$bp-xxlarge})';
 $mq-retina: '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)';
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
 body {
-  // min-height: 100vh;
-  // width: 100vw;
   font-family: $font2;
   margin: 0;
-  font-size: $body;
   line-height: $line-height;
 
-  @media #{$mq-medium} {
-    font-size: $body * 1.2;
-    line-height: $line-height * 1.2;
-  }
+  // @media #{$mq-medium} {
+  //   font-size: $body * 1.2;
+  //   line-height: $line-height * 1.2;
+  // }
 
-  @media #{$mq-large} {
-    font-size: $body * 1.3;
-  }
+  // @media #{$mq-large} {
+  //   font-size: $body * 1.3;
+  // }
 
-  @media #{$mq-xlarge} {
-    font-size: $body * 1.4;
-  }
+  // @media #{$mq-xlarge} {
+  //   font-size: $body * 1.4;
+  // }
 
-  @media #{$mq-xxlarge} {
-    font-size: $body * 1.6;
-  }
+  // @media #{$mq-xxlarge} {
+  //   font-size: $body * 1.6;
+  // }
 }
 
 @mixin container {
@@ -104,10 +105,10 @@ h3 {
   margin: 0;
 }
 
-.App {
-  height: 100%;
-  width: 100vw;
-}
+// .App {
+//   height: 100%;
+//   width: 100vw;
+// }
 
 @import '../styles/components/NavBar.scss';
 @import '../styles/pages/LandingPage.scss';

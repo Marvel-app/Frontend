@@ -1,6 +1,7 @@
 .nav-bar {
   background-color: $black;
   margin-bottom: 80px;
+
   &__container {
     & a {
       text-decoration: none;
@@ -12,6 +13,7 @@
     padding: 0 32px;
     @include container;
   }
+
   &__title {
     color: $white;
   }
@@ -25,8 +27,8 @@
       color: $white;
       margin-left: 1.7em;
       font-family: $font1;
-      font-size: $subtitle;
-      font-weight: normal;
+      font-size: $title3;
+      font-weight: bold;
     }
   }
 }

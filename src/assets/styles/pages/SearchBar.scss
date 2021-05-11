@@ -18,7 +18,7 @@
       border-radius: 100px;
       background-color: $mainBackground;
       box-shadow: 4px 4px 4px rgba($color: #000000, $alpha: 0.25);
-      font-size: $title3;
+      font-size: $title2;
       font-weight: bold;
       text-transform: uppercase;
       padding-left: 45px;
@@ -34,7 +34,7 @@
       background-color: $black;
       color: $white;
       padding: 21px 50px;
-      font-size: $body;
+      font-size: $subtitle;
       align-self: center;
       &:hover {
         cursor: pointer;
@@ -49,20 +49,31 @@
   &__comics-container {
     // text-decoration: none;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     @include container;
+
+    @media #{$mq-small} {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media #{$mq-medium} {
+      grid-template-columns: repeat(3, 1fr);
+    }
 
     @media #{$mq-large} {
       grid-template-columns: repeat(5, 1fr);
     }
 
     @media #{$mq-xlarge} {
-      grid-template-columns: repeat(7, 1fr);
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    @media #{$mq-xxlarge} {
+      grid-template-columns: repeat(6, 1fr);
     }
 
     &-item {
       padding-right: 0.2em;
-      margin-bottom: 0.8em;
+      margin: 0.8em auto;
 
       & a {
         text-decoration: none;

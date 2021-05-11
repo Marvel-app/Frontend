@@ -5,7 +5,8 @@
     margin-right: 1em;
 
     & p {
-      font-size: $subheadline;
+      max-width: 230px;
+      font-size: $body;
       text-align: center;
       color: $black;
     }

@@ -10,8 +10,6 @@ export const FavoritesList = (props: any) => {
   const history = useHistory();
   const favorites: IComic[] = props.location.state;
 
-  // console.log('favoritos', favorites);
-
   const validateToken = (): string => {
     const token = getToken();
     if (token === '') {
@@ -21,44 +19,42 @@ export const FavoritesList = (props: any) => {
   };
 
   const addComicsToFavorite = async (comics: IComic[], token: string) => {
-    for (let i = 0; i < comics.length; i++) {
-      const element = comics[i];
-      // console.log('elemento del for', element);
-
-      await fetch(`${url}/api/user/favorites`, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token,
-        },
-        body: JSON.stringify(element),
+    // console.log('elemento del for', element);
+    const datos = { fav: comics };
+    console.log(datos);
+    await fetch(`${url}/api/user/favorites`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(datos),
+    })
+      .then((r) => r.json())
+      .then((response) => {
+        console.log(response);
+        // Swal.fire({
+        //   title: 'You have 3 new comics in your favorites list',
+        //   icon: 'success',
+        //   confirmButtonText: 'Cool',
+        // }).then((result) => {
+        //   if (result.value) {
+        //     window.location.reload();
+        //   }
+        // });
       })
-        .then((r) => r.json())
-        .then((response) => {
-          console.log(response);
-          // Swal.fire({
-          //   title: 'You have 3 new comics in your favorites list',
-          //   icon: 'success',
-          //   confirmButtonText: 'Cool',
-          // }).then((result) => {
-          //   if (result.value) {
-          //     window.location.reload();
-          //   }
-          // });
+      .catch(() =>
+        Swal.fire({
+          title: 'Ocurrio un error!',
+          icon: 'error',
+          confirmButtonText: 'Cerrar',
+        }).then((result) => {
+          if (result.value) {
+            window.location.reload();
+          }
         })
-        .catch(() =>
-          Swal.fire({
-            title: 'Ocurrio un error!',
-            icon: 'error',
-            confirmButtonText: 'Cerrar',
-          }).then((result) => {
-            if (result.value) {
-              window.location.reload();
-            }
-          })
-        );
-    }
+      );
   };
 
   const getRandomComics = async () => {

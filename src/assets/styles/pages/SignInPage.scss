@@ -4,18 +4,22 @@
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
-  position: relative;
 
   &__overlay {
     background-color: rgba(0, 0, 0, 0.6);
     min-height: 100vh;
   }
 
-  &__title {
+  &__main {
+    display: flex;
+    justify-content: space-between;
     @include container;
+  }
+
+  &__title {
     span {
       color: $white;
-      font-size: $title3;
+      font-size: $largeTitle;
       display: block;
       line-height: 1;
     }
@@ -28,9 +32,9 @@
     display: flex;
     flex-direction: column;
     width: 435px;
-    position: absolute;
-    right: 0;
-    top: 140px;
+    // position: absolute;
+    // right: 0;
+    // top: 14rem;
 
     &--title {
       font-size: $title3;
@@ -47,6 +51,7 @@
     }
 
     & form {
+      font-size: $body;
       margin: 0 30px;
       display: flex;
       flex-direction: column;
@@ -64,7 +69,7 @@
       background-color: $black;
       color: $white;
       padding: 21px 114px;
-      font-size: $body;
+      font-size: $subtitle;
 
       &:hover {
         cursor: pointer;
@@ -80,7 +85,8 @@
       background-color: $white;
       color: $black;
       padding: 21px 48px;
-      font-size: $body;
+      font-size: $subtitle;
+      text-decoration: none;
 
       & img {
         margin-right: 8px;
@@ -96,7 +102,7 @@
       color: $black;
       text-align: center;
       margin-bottom: 32px;
-      font-size: $subheadline;
+      font-size: $body;
       & span {
         font-weight: bold;
       }

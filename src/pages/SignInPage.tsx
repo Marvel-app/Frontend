@@ -88,49 +88,51 @@ export const SignInPage = () => {
     <div className='sign-in-page'>
       <div className='sign-in-page__overlay'>
         <NavBar noBg={true} />
-        <h3 className='sign-in-page__title'>
-          <span>Welcome Back!</span>
-        </h3>
-        <div className='sign-in-page__card'>
-          <p className='sign-in-page__card--title'>Sign in</p>
-          <form>
-            <label>Username</label>
-            <input
-              name='username'
-              placeholder='Username'
-              type='text'
-              onChange={handleInput}
-            />
-            <label>Password</label>
-            <input
-              name='password'
-              placeholder='Password'
-              type='password'
-              onChange={handleInput}
-            />
-            <button
-              className='sign-in-page__card--login'
-              type='button'
-              onClick={loginUser}
+        <div className='sign-in-page__main'>
+          <h3 className='sign-in-page__title'>
+            <span>Welcome Back!</span>
+          </h3>
+          <div className='sign-in-page__card'>
+            <p className='sign-in-page__card--title'>Sign in</p>
+            <form>
+              <label>Username</label>
+              <input
+                name='username'
+                placeholder='Username'
+                type='text'
+                onChange={handleInput}
+              />
+              <label>Password</label>
+              <input
+                name='password'
+                placeholder='Password'
+                type='password'
+                onChange={handleInput}
+              />
+              <button
+                className='sign-in-page__card--login'
+                type='button'
+                onClick={loginUser}
+              >
+                Log in
+              </button>
+            </form>
+            <p className='sign-in-page__card--or'>Or</p>
+            <a
+              className='sign-in-page__card--google'
+              href='https://marvelappplatzimaster.herokuapp.com/api/oauth/google'
+              // target='_blank'
+              rel='noreferrer'
             >
-              Log in
-            </button>
-          </form>
-          <p className='sign-in-page__card--or'>Or</p>
-          <a
-            className='sign-in-page__card--google'
-            href='https://marvelappplatzimaster.herokuapp.com/api/oauth/google'
-            // target='_blank'
-            rel='noreferrer'
-          >
-            <img src={googleIcon} alt='google icon' />
-            Log in with Google
-          </a>
-          <Link to='/signup' className='sign-in-page__card-signin-redirect'>
-            <p>
-              Don't have an account? Sign up<span> here!</span>
-            </p>
-          </Link>
+              <img src={googleIcon} alt='google icon' />
+              Log in with Google
+            </a>
+            <Link to='/signup' className='sign-in-page__card-signin-redirect'>
+              <p>
+                Don't have an account? Sign up<span> here!</span>
+              </p>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

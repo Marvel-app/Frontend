@@ -1,20 +1,24 @@
 .comic-description {
   &__container {
     background-color: $mainBackground;
+    min-height: 100vh;
   }
 
   &__description-box {
     display: flex;
+    justify-content: center;
     @include container;
 
     &-thumbnail {
-      height: 1000px;
-      width: 668px;
+      height: 90%;
+      // width: 668px;
       margin-right: 50px;
+      margin-bottom: 50px;
     }
 
     &-info {
       display: flex;
+      width: 50%;
       flex-direction: column;
 
       & h3 {
@@ -36,10 +40,12 @@
 
     &-details {
       &-title {
+        font-size: $title3;
         font-weight: bold;
       }
 
       &-body {
+        font-size: $subtitle;
         margin-bottom: 1.5em;
       }
     }
@@ -53,7 +59,7 @@
       padding: 1em 4em;
       border: none;
       background-color: $black;
-      font-size: $body;
+      font-size: $subtitle;
       color: $white;
       margin-bottom: 1em;
     }
