@@ -45,9 +45,28 @@ export const ComicDescription = (props: any) => {
       },
       body: JSON.stringify(body),
     })
-      .then((r) => r.json())
+      .then((r) => {
+        switch (r.status) {
+          case 200:
+            return r.json();
+          case 409:
+            Swal.fire({
+              title: 'This comic is already in your favorites collection',
+              icon: 'info',
+              confirmButtonText: 'Ok',
+            });
+            break;
+          default:
+            Swal.fire({
+              title: 'Error adding this comic to favorites',
+              icon: 'error',
+              confirmButtonText: 'Close',
+            });
+            break;
+        }
+      })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         Swal.fire({
           title: 'Comic added succesfully to your favorites',
           icon: 'success',
@@ -56,13 +75,10 @@ export const ComicDescription = (props: any) => {
       })
       .catch(() =>
         Swal.fire({
-          title: 'Ocurrio un error!',
+          title: 'There was an unexpected error!',
+          text: 'Please report the problem',
           icon: 'error',
-          confirmButtonText: 'Cerrar',
-        }).then((result) => {
-          if (result.value) {
-            window.location.reload();
-          }
+          confirmButtonText: 'Close',
         })
       );
   };

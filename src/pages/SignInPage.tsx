@@ -1,7 +1,7 @@
 import { NavBar } from '../components/NavBar';
 import googleIcon from '../assets/images/google-icon.png';
 import { Link, useHistory } from 'react-router-dom';
-import { url } from '../globals';
+import { url, googleAuthUrl } from '../globals';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 
@@ -37,49 +37,50 @@ export const SignInPage = () => {
       body: userInfo,
     })
       .then((r) => {
-        if (r.status === 409 || r.status === 400) {
-          Swal.fire({
-            title: 'Credenciales incorrectas',
-            icon: 'error',
-            confirmButtonText: 'Cerrar',
-          }).then((result) => {
-            if (result.value) {
-              window.location.reload();
-            }
-          });
-        } else {
-          return r.json();
+        switch (r.status) {
+          case 200:
+            return r.json();
+          case 400:
+            Swal.fire({
+              title: 'Incorrect information',
+              text: 'Please verify that your username is correct',
+              icon: 'error',
+              confirmButtonText: 'Close',
+            });
+            break;
+          case 409:
+            Swal.fire({
+              title: 'Invalid credentials',
+              text:
+                'It seems that the credentials are incorrect or the user does not exists',
+              icon: 'info',
+              confirmButtonText: 'Close',
+            });
+            break;
+          default:
+            Swal.fire({
+              title: 'There was an unexpected error!',
+              text: 'Please report the problem',
+              icon: 'error',
+              confirmButtonText: 'Close',
+            });
+            break;
         }
       })
       .then((response: any) => {
-        console.log('aqui esta la respuesta', response);
-        if (response === undefined) {
-          Swal.fire({
-            title: 'Credenciales incorrectas',
-            icon: 'error',
-            confirmButtonText: 'Cerrar',
-          }).then((result) => {
-            if (result.value) {
-              window.location.reload();
-            }
-          });
-        } else {
-          const { jwt } = response;
-          console.log(jwt);
-          document.cookie = `jwt=${jwt};max-age=900;secure`;
-          history.push('/home');
-        }
+        // console.log('aqui esta la respuesta', response);
+        const { jwt } = response;
+        // console.log(jwt);
+        document.cookie = `jwt=${jwt};max-age=3600;secure`;
+        history.push(' /home');
       })
       .catch((err) => {
-        console.log('err', err);
+        // console.log('err', err);
         Swal.fire({
-          title: 'Ocurrio un error!',
+          title: 'There was an unexpected error!',
+          text: 'Please report the problem',
           icon: 'error',
-          confirmButtonText: 'Cerrar',
-        }).then((result) => {
-          if (result.value) {
-            window.location.reload();
-          }
+          confirmButtonText: 'Close',
         });
       });
   };
@@ -120,8 +121,7 @@ export const SignInPage = () => {
             <p className='sign-in-page__card--or'>Or</p>
             <a
               className='sign-in-page__card--google'
-              href='https://marvelappplatzimaster.herokuapp.com/api/oauth/google'
-              // target='_blank'
+              href={googleAuthUrl}
               rel='noreferrer'
             >
               <img src={googleIcon} alt='google icon' />

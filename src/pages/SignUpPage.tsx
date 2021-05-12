@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import { url } from '../globals';
+import { url, googleAuthUrl } from '../globals';
 import { NavBar } from '../components/NavBar';
 import Swal from 'sweetalert2';
 import googleIcon from '../assets/images/google-icon.png';
@@ -33,14 +33,9 @@ export const SignUpPage = () => {
   const validatePassword = () => {
     if (form.password !== form.confirmPassword) {
       Swal.fire({
-        title: 'Contraseñas diferentes',
-        text: 'Las contraseñas no coinciden por favor intenta de nuevo',
+        title: 'The passwords do not match',
         icon: 'error',
-        confirmButtonText: 'Cerrar',
-      }).then((result) => {
-        if (result.value) {
-          window.location.reload();
-        }
+        confirmButtonText: 'Close',
       });
     } else {
       const formattedForm = {
@@ -64,38 +59,47 @@ export const SignUpPage = () => {
       body: userInfo,
     })
       .then((r) => {
-        if (r.status === 201) {
-          Swal.fire({
-            title: 'Cuenta creada ¡Bienvenido!',
-            icon: 'success',
-            confirmButtonText: 'Cerrar',
-          }).then((result) => {
-            if (result.value) {
-              window.location.reload();
-            }
-          });
-          history.push('/signin');
-        } else {
-          Swal.fire({
-            title: 'Ocurrio un error!',
-            icon: 'error',
-            confirmButtonText: 'Cerrar',
-          }).then((result) => {
-            if (result.value) {
-              window.location.reload();
-            }
-          });
+        switch (r.status) {
+          case 201:
+            Swal.fire({
+              title: 'Account created, Welcome!',
+              icon: 'success',
+              confirmButtonText: 'Close',
+            }).then(() => {
+              history.push('/signin');
+            });
+            break;
+          case 400:
+            Swal.fire({
+              title: 'Incorrect information',
+              text: 'Please verify that your username or email are correct',
+              icon: 'error',
+              confirmButtonText: 'Close',
+            });
+            break;
+          case 409:
+            Swal.fire({
+              title: 'Email or username already in use',
+              icon: 'info',
+              confirmButtonText: 'Close',
+            });
+            break;
+          default:
+            Swal.fire({
+              title: 'There was an unexpected error!',
+              text: 'Please report the problem',
+              icon: 'error',
+              confirmButtonText: 'Close',
+            });
+            break;
         }
       })
       .catch(() =>
         Swal.fire({
-          title: 'Ocurrio un error!',
+          title: 'There was an unexpected error!',
+          text: 'Please report the problem',
           icon: 'error',
-          confirmButtonText: 'Cerrar',
-        }).then((result) => {
-          if (result.value) {
-            window.location.reload();
-          }
+          confirmButtonText: 'Close',
         })
       );
   };
@@ -153,8 +157,7 @@ export const SignUpPage = () => {
             <p className='sign-up-page__card--or'>Or</p>
             <a
               className='sign-up-page__card--google'
-              href='https://marvelappplatzimaster.herokuapp.com/api/oauth/google'
-              // target='_blank'
+              href={googleAuthUrl}
               rel='noreferrer'
             >
               <img src={googleIcon} alt='google icon' />

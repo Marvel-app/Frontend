@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { Comic } from '../components/Comic';
 import { NavBar } from '../components/NavBar';
@@ -7,6 +7,7 @@ import { Info, IComic } from './Home';
 import { getToken } from '../utils/getToken';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import { LoadingCircle } from '../components/LoadingCircle';
 
 interface SearchForm {
   comicName: string;
@@ -14,6 +15,7 @@ interface SearchForm {
 
 export const SearchBar = () => {
   const history = useHistory();
+  const [isLoading, setIsloading] = useState(false);
   const [comicsFound, setComicsFound] = useState<Info>({ comicsArray: [] });
   const [numberOfComics, setNumberOfComics] = useState(10);
   const [form, setForm] = useState<SearchForm>({
@@ -28,11 +30,6 @@ export const SearchBar = () => {
     });
   };
 
-  const incrementNumberOfComics = () => {
-    setNumberOfComics(numberOfComics + 10);
-    searchComics();
-  };
-
   const validateToken = (): string => {
     const token = getToken();
     if (token === '') {
@@ -42,6 +39,7 @@ export const SearchBar = () => {
   };
 
   const searchComics = async () => {
+    setIsloading(true);
     const token = validateToken();
     await fetch(
       `${url}/api/comics?heroname=${form.comicName}&numberComics=${numberOfComics}`,
@@ -54,23 +52,49 @@ export const SearchBar = () => {
         },
       }
     )
-      .then((r) => r.json())
+      .then((r) => {
+        switch (r.status) {
+          case 200:
+            return r.json();
+          case 409:
+            Swal.fire({
+              title: 'Name not found',
+              text: 'The hero name does not match or does not exists',
+              icon: 'error',
+              confirmButtonText: 'Ok',
+            });
+            break;
+          default:
+            Swal.fire({
+              title: 'Error searching the hero',
+              text: 'Please report the problem',
+              icon: 'error',
+              confirmButtonText: 'Ok',
+            });
+            break;
+        }
+      })
       .then((response) => {
-        console.log('aqui estan los comic buscados', response);
+        // console.log('aqui estan los comic buscados', response);
+        setIsloading(false);
         setComicsFound(response);
       })
       .catch(() =>
         Swal.fire({
-          title: 'Ocurrio un error!',
+          title: 'There was an unexpected error!',
+          text: 'Please report the problem',
           icon: 'error',
-          confirmButtonText: 'Cerrar',
-        }).then((result) => {
-          if (result.value) {
-            window.location.reload();
-          }
+          confirmButtonText: 'Close',
         })
       );
   };
+
+  useEffect(() => {
+    if (numberOfComics !== 10) {
+      searchComics(); // console.log('useEffect activado');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numberOfComics]);
 
   return (
     <div className='search-bar'>
@@ -83,9 +107,14 @@ export const SearchBar = () => {
             placeholder='Write your favorite Hero'
             onChange={handleInput}
           />
-          <button type='button' onClick={() => searchComics()}>
-            Search
-          </button>
+
+          {isLoading ? (
+            <LoadingCircle />
+          ) : (
+            <button type='button' onClick={() => searchComics()}>
+              Search
+            </button>
+          )}
         </div>
         {comicsFound.comicsArray.length !== 0 ? (
           <>
@@ -104,9 +133,16 @@ export const SearchBar = () => {
               ))}
             </div>
             <div className='search-bar__load-more'>
-              <button type='button' onClick={() => incrementNumberOfComics()}>
-                Load more
-              </button>
+              {isLoading ? (
+                <LoadingCircle />
+              ) : (
+                <button
+                  type='button'
+                  onClick={() => setNumberOfComics(numberOfComics + 10)}
+                >
+                  Load more
+                </button>
+              )}
             </div>
           </>
         ) : null}

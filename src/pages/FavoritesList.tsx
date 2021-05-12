@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Comic } from '../components/Comic';
 import { NavBar } from '../components/NavBar';
 import { url } from '../globals';
@@ -5,10 +6,13 @@ import { IComic } from './Home';
 import { getToken } from '../utils/getToken';
 import { useHistory } from 'react-router';
 import Swal from 'sweetalert2';
+import { LoadingCircle } from '../components/LoadingCircle';
 
 export const FavoritesList = (props: any) => {
   const history = useHistory();
-  const favorites: IComic[] = props.location.state;
+  const [isLoading, setIsLoading] = useState(false);
+  const [favorites, setFavorites] = useState<IComic[]>(props.location.state);
+  // const favorites: IComic[] = props.location.state;
 
   const validateToken = (): string => {
     const token = getToken();
@@ -18,8 +22,32 @@ export const FavoritesList = (props: any) => {
     return token;
   };
 
+  const getFavorites = async (token: string) => {
+    await fetch(`${url}/api/user/favorites`, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    })
+      .then((r) => r.json())
+      .then((response) => {
+        // console.log('aqui estan los favoritos', response);
+        setFavorites(response.favorites);
+        setIsLoading(false);
+      })
+      .catch(() =>
+        Swal.fire({
+          title: 'There was an error showing your favorites!',
+          text: 'Please report the problem',
+          icon: 'error',
+          confirmButtonText: 'Close',
+        })
+      );
+  };
+
   const addComicsToFavorite = async (comics: IComic[], token: string) => {
-    // console.log('elemento del for', element);
     const datos = { fav: comics };
     console.log(datos);
     await fetch(`${url}/api/user/favorites`, {
@@ -33,16 +61,12 @@ export const FavoritesList = (props: any) => {
     })
       .then((r) => r.json())
       .then((response) => {
-        console.log(response);
-        // Swal.fire({
-        //   title: 'You have 3 new comics in your favorites list',
-        //   icon: 'success',
-        //   confirmButtonText: 'Cool',
-        // }).then((result) => {
-        //   if (result.value) {
-        //     window.location.reload();
-        //   }
-        // });
+        // console.log(resp¡onse);
+        Swal.fire({
+          title: 'You have 3 new comics in your favorites list',
+          icon: 'success',
+          confirmButtonText: 'Cool',
+        }).then(() => getFavorites(token));
       })
       .catch(() =>
         Swal.fire({
@@ -58,6 +82,7 @@ export const FavoritesList = (props: any) => {
   };
 
   const getRandomComics = async () => {
+    setIsLoading(true);
     const token = validateToken();
     await fetch(`${url}/api/comics/randoms?numberComics=3`, {
       method: 'GET',
@@ -84,6 +109,7 @@ export const FavoritesList = (props: any) => {
         })
       );
   };
+
   return (
     <div className='favorites-list'>
       <div className='favorites-list__container'>
@@ -107,9 +133,13 @@ export const FavoritesList = (props: any) => {
           </div>
         )}
         <div className='favorites-list__lucky'>
-          <button type='button' onClick={() => getRandomComics()}>
-            Add 3 random comics
-          </button>
+          {isLoading ? (
+            <LoadingCircle />
+          ) : (
+            <button type='button' onClick={() => getRandomComics()}>
+              Add 3 random comics
+            </button>
+          )}
         </div>
       </div>
     </div>

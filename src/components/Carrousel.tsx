@@ -1,6 +1,7 @@
 import { Comic } from './Comic';
 import { Info } from '../pages/Home';
 import { Link } from 'react-router-dom';
+import { LoadingCircle } from './LoadingCircle';
 
 interface Props {
   title: string;
@@ -48,7 +49,7 @@ export const Carrousel = ({ title, data, type }: Props) => {
         </div>
         <div className='carrousel__comic-container'>
           {data.comicsArray.length === 0 ? (
-            <p>Cargando comics</p>
+            <LoadingCircle />
           ) : (
             data.comicsArray.map((comic: any) => (
               <div className='carrousel__comic-container-item'>

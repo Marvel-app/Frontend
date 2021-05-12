@@ -51,18 +51,15 @@ export const Home = ({ location }: any) => {
     })
       .then((r) => r.json())
       .then((response) => {
-        console.log('aqui estan los favoritos', response);
+        // console.log('aqui estan los favoritos', response);
         setFavorites({ comicsArray: response.favorites });
       })
       .catch(() =>
         Swal.fire({
-          title: 'Ocurrio un error!',
+          title: 'There was an unexpected error!',
+          text: 'Please report the problem',
           icon: 'error',
-          confirmButtonText: 'Cerrar',
-        }).then((result) => {
-          if (result.value) {
-            window.location.reload();
-          }
+          confirmButtonText: 'Close',
         })
       );
   };
@@ -78,18 +75,15 @@ export const Home = ({ location }: any) => {
     })
       .then((r) => r.json())
       .then((response) => {
-        console.log('aqui estan los comics nuevos', response);
+        // console.log('aqui estan los comics nuevos', response);
         setNewComics({ comicsArray: response.comicsArray });
       })
       .catch(() =>
         Swal.fire({
-          title: 'Ocurrio un error!',
+          title: 'There was an unexpected error!',
+          text: 'Please report the problem',
           icon: 'error',
-          confirmButtonText: 'Cerrar',
-        }).then((result) => {
-          if (result.value) {
-            window.location.reload();
-          }
+          confirmButtonText: 'Close',
         })
       );
   };
@@ -105,21 +99,33 @@ export const Home = ({ location }: any) => {
     })
       .then((r) => r.json())
       .then((response) => {
-        console.log('aqui estan los comics por heroe', response);
+        // console.log('aqui estan los comics por heroe', response);
         setComicsByHero(response);
       })
       .catch(() =>
         Swal.fire({
-          title: 'Ocurrio un error!',
+          title: 'There was an unexpected error!',
+          text: 'Please report the problem',
           icon: 'error',
-          confirmButtonText: 'Cerrar',
-        }).then((result) => {
-          if (result.value) {
-            window.location.reload();
-          }
+          confirmButtonText: 'Close',
         })
       );
   };
+
+  // const getMockData = async () => {
+  //   await fetch('ironman.json', {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Accept: 'application/json',
+  //     },
+  //   })
+  //     .then((r) => r.json())
+  //     .then((response) => {
+  //       setFavorites(response);
+  //       setNewComics(response);
+  //       setComicsByHero(response);
+  //     });
+  // };
 
   const fetchComics = async () => {
     const token = getToken();
@@ -133,6 +139,7 @@ export const Home = ({ location }: any) => {
   };
 
   useEffect(() => {
+    // getMockData();
     getJwtFromGoogle();
     fetchComics();
     // eslint-disable-next-line react-hooks/exhaustive-deps
