@@ -4,6 +4,10 @@
     flex-direction: column;
     margin-right: 1em;
 
+    & img {
+      margin: auto;
+    }
+
     & p {
       max-width: 230px;
       font-size: $body;
