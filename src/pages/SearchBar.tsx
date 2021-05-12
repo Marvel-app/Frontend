@@ -55,6 +55,7 @@ export const SearchBar = () => {
       .then(async (r) => {
         switch (r.status) {
           case 409:
+            setIsloading(false);
             await Swal.fire({
               title: 'Name not found',
               text: 'The hero name does not match or does not exists',
@@ -71,6 +72,7 @@ export const SearchBar = () => {
               }
             });
           default:
+            setIsloading(false);
             await Swal.fire({
               title: 'Error searching the hero',
               text: 'Please report the problem',
@@ -81,6 +83,7 @@ export const SearchBar = () => {
         }
       })
       .catch(async () => {
+        setIsloading(false);
         await Swal.fire({
           title: 'There was an unexpected error!',
           text: 'Please report the problem',

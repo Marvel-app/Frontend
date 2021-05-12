@@ -17,15 +17,19 @@
 
   &__comics-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    // grid-template-columns: repeat(5, 1fr);
     @include container;
+
+    @media #{$mq-small} {
+      grid-template-columns: repeat(3, 1fr);
+    }
 
     @media #{$mq-medium} {
       grid-template-columns: repeat(3, 1fr);
     }
 
     @media #{$mq-large} {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
     }
 
     @media #{$mq-xlarge} {
@@ -38,11 +42,10 @@
 
     &-item {
       padding-right: 0.2em;
-      margin-bottom: 0.8em;
+      margin: 0.8em auto;
     }
 
     & p {
-      margin: auto;
       text-align: center;
     }
   }
