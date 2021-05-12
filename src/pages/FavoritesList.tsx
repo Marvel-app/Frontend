@@ -70,13 +70,10 @@ export const FavoritesList = (props: any) => {
       })
       .catch(() =>
         Swal.fire({
-          title: 'Ocurrio un error!',
+          title: 'There was an error showing your favorites!',
+          text: 'Please report the problem',
           icon: 'error',
-          confirmButtonText: 'Cerrar',
-        }).then((result) => {
-          if (result.value) {
-            window.location.reload();
-          }
+          confirmButtonText: 'Close',
         })
       );
   };
@@ -94,18 +91,15 @@ export const FavoritesList = (props: any) => {
     })
       .then((r) => r.json())
       .then((response) => {
-        console.log('aqui estan los comics randoms', response.comicsArray);
+        // console.log('aqui estan los comics randoms', response.comicsArray);
         addComicsToFavorite(response.comicsArray, token);
       })
       .catch(() =>
         Swal.fire({
-          title: 'Ocurrio un error!',
+          title: 'There was an error showing your favorites!',
+          text: 'Please report the problem',
           icon: 'error',
-          confirmButtonText: 'Cerrar',
-        }).then((result) => {
-          if (result.value) {
-            window.location.reload();
-          }
+          confirmButtonText: 'Close',
         })
       );
   };

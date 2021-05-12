@@ -144,6 +144,7 @@ export const Home = ({ location }: any) => {
     fetchComics();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <div className='home__background'>
       <NavBar isHome={true} />

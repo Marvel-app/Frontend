@@ -52,20 +52,26 @@ export const SearchBar = () => {
         },
       }
     )
-      .then((r) => {
+      .then(async (r) => {
         switch (r.status) {
-          case 200:
-            return r.json();
           case 409:
-            Swal.fire({
+            await Swal.fire({
               title: 'Name not found',
               text: 'The hero name does not match or does not exists',
               icon: 'error',
               confirmButtonText: 'Ok',
             });
             break;
+          case 200:
+            return r.json().then((response) => {
+              // console.log('aqui estan los comic buscados', response);
+              setIsloading(false);
+              if (response !== undefined) {
+                setComicsFound(response);
+              }
+            });
           default:
-            Swal.fire({
+            await Swal.fire({
               title: 'Error searching the hero',
               text: 'Please report the problem',
               icon: 'error',
@@ -74,19 +80,14 @@ export const SearchBar = () => {
             break;
         }
       })
-      .then((response) => {
-        // console.log('aqui estan los comic buscados', response);
-        setIsloading(false);
-        setComicsFound(response);
-      })
-      .catch(() =>
-        Swal.fire({
+      .catch(async () => {
+        await Swal.fire({
           title: 'There was an unexpected error!',
           text: 'Please report the problem',
           icon: 'error',
           confirmButtonText: 'Close',
-        })
-      );
+        });
+      });
   };
 
   useEffect(() => {

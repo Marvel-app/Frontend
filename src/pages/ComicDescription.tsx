@@ -43,17 +43,25 @@ export const ComicDescription = (props: any) => {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + token,
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify({ fav: [body] }),
     })
-      .then((r) => {
+      .then(async (r) => {
+        // console.log('here is the status', r.status);
         switch (r.status) {
-          case 200:
-            return r.json();
           case 409:
+            // console.log('entre a 409');
             Swal.fire({
               title: 'This comic is already in your favorites collection',
               icon: 'info',
               confirmButtonText: 'Ok',
+            });
+            break;
+          case 200:
+            // console.log('entre a 200');
+            Swal.fire({
+              title: 'Comic added succesfully to your favorites',
+              icon: 'success',
+              confirmButtonText: 'Cool',
             });
             break;
           default:
@@ -64,14 +72,6 @@ export const ComicDescription = (props: any) => {
             });
             break;
         }
-      })
-      .then((response) => {
-        // console.log(response);
-        Swal.fire({
-          title: 'Comic added succesfully to your favorites',
-          icon: 'success',
-          confirmButtonText: 'Cool',
-        });
       })
       .catch(() =>
         Swal.fire({

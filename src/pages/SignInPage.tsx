@@ -36,12 +36,18 @@ export const SignInPage = () => {
       },
       body: userInfo,
     })
-      .then((r) => {
+      .then(async (r) => {
         switch (r.status) {
           case 200:
-            return r.json();
+            return r.json().then((response: any) => {
+              // console.log('aqui esta la respuesta', response);
+              const { jwt } = response;
+              // console.log(jwt);
+              document.cookie = `jwt=${jwt};max-age=3600;secure`;
+              history.push('/home');
+            });
           case 400:
-            Swal.fire({
+            await Swal.fire({
               title: 'Incorrect information',
               text: 'Please verify that your username is correct',
               icon: 'error',
@@ -49,16 +55,15 @@ export const SignInPage = () => {
             });
             break;
           case 409:
-            Swal.fire({
+            await Swal.fire({
               title: 'Invalid credentials',
-              text:
-                'It seems that the credentials are incorrect or the user does not exists',
+              text: 'It seems that the credentials are incorrect or the user does not exists',
               icon: 'info',
               confirmButtonText: 'Close',
             });
             break;
           default:
-            Swal.fire({
+            await Swal.fire({
               title: 'There was an unexpected error!',
               text: 'Please report the problem',
               icon: 'error',
@@ -67,16 +72,9 @@ export const SignInPage = () => {
             break;
         }
       })
-      .then((response: any) => {
-        // console.log('aqui esta la respuesta', response);
-        const { jwt } = response;
-        // console.log(jwt);
-        document.cookie = `jwt=${jwt};max-age=3600;secure`;
-        history.push(' /home');
-      })
-      .catch((err) => {
+      .catch(async (err) => {
         // console.log('err', err);
-        Swal.fire({
+        await Swal.fire({
           title: 'There was an unexpected error!',
           text: 'Please report the problem',
           icon: 'error',
