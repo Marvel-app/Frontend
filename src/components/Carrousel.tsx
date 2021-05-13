@@ -24,13 +24,12 @@ export const Carrousel = ({ title, data, type }: Props) => {
             <p>You don't have favorite comics. Add one!</p>
           ) : (
             data.comicsArray.map((comic: any) => (
-              <div className='carrousel__comic-container-item'>
+              <div
+                className='carrousel__comic-container-item'
+                key={comic.title}
+              >
                 <Link to={{ pathname: '/comic-description', state: comic }}>
-                  <Comic
-                    key={comic.title}
-                    title={comic.title}
-                    thumbnail={comic.image}
-                  />
+                  <Comic title={comic.title} thumbnail={comic.image} />
                 </Link>
               </div>
             ))
@@ -52,13 +51,12 @@ export const Carrousel = ({ title, data, type }: Props) => {
             <LoadingCircle />
           ) : (
             data.comicsArray.map((comic: any) => (
-              <div className='carrousel__comic-container-item'>
+              <div
+                className='carrousel__comic-container-item'
+                key={comic.title}
+              >
                 <Link to={{ pathname: '/comic-description', state: comic }}>
-                  <Comic
-                    key={comic.title}
-                    title={comic.title}
-                    thumbnail={comic.image}
-                  />
+                  <Comic title={comic.title} thumbnail={comic.image} />
                 </Link>
               </div>
             ))
