@@ -14,10 +14,10 @@
   &__main {
     display: flex;
     justify-content: space-between;
+    @include container;
   }
 
   &__title {
-    @include container;
     span {
       color: $white;
       font-size: $largeTitle;
@@ -27,13 +27,12 @@
   }
 
   &__card {
-    @include container;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     width: 435px;
-    margin-bottom: 50px;
+    margin-bottom: 5vh;
     // position: absolute;
     // right: 0;
     // top: 140px;
